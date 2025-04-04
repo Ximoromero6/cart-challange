@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap");
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+code,
+em,
+img,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+b,
+u,
+i,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+main,
+canvas,
+embed,
+footer,
+header,
+nav,
+section,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+     -moz-text-size-adjust: none;
+          text-size-adjust: none;
+}
+
+footer,
+header,
+nav,
+section,
+main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  font-family: "Red Hat Text", sans-serif;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+body {
+  background-color: hsl(13, 31%, 94%);
+}
+body main {
+  display: flex;
+  max-width: 1400px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 0 20px;
+  gap: 40px;
+}
+body main .shop {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 2;
+}
+body main .shop .shop__title {
+  font-size: 34px;
+  font-weight: 900;
+  color: hsl(14, 65%, 9%);
+}
+body main .shop .shop__products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+body main .shop .shop__products .product {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+body main .shop .shop__products .product .image__container {
+  position: relative;
+}
+body main .shop .shop__products .product .image__container .product__image {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+body main .shop .shop__products .product .image__container .product__button {
+  padding: 12px 25px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid hsl(14, 25%, 72%);
+  cursor: pointer;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: -moz-max-content;
+  width: max-content;
+  transition: all 0.1s;
+  background-color: hsl(20, 50%, 98%);
+}
+body main .shop .shop__products .product .image__container .product__button i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: hsl(14, 86%, 42%);
+}
+body main .shop .shop__products .product .image__container .product__button label {
+  font-weight: 600;
+  font-size: 15px;
+  font-family: inherit;
+  color: hsl(14, 65%, 9%);
+  cursor: pointer;
+}
+body main .shop .shop__products .product .image__container .product__button:hover {
+  border-color: hsl(14, 86%, 42%);
+}
+body main .shop .shop__products .product .image__container .product__button:hover label {
+  color: hsl(14, 86%, 42%);
+}
+body main .shop .shop__products .product .image__container .product__button:focus {
+  transition: none;
+  outline: 2px solid hsl(7, 20%, 60%);
+  outline-offset: 1px;
+}
+body main .shop .shop__products .product .product__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body main .shop .shop__products .product .product__info .product__category {
+  font-size: 14px;
+  color: hsl(7, 20%, 60%);
+  font-weight: 600;
+}
+body main .shop .shop__products .product .product__info .product__title {
+  font-size: 16px;
+  color: hsl(14, 65%, 9%);
+  font-weight: 600;
+}
+body main .shop .shop__products .product .product__info .product__price {
+  font-size: 17px;
+  color: hsl(14, 86%, 42%);
+  font-weight: 600;
+}
+body main .shop .shop__products .product.selected .image__container .product__image {
+  border-color: hsl(14, 86%, 42%);
+}
+body main .cart {
+  flex: 1;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 20px;
+  border: 1px solid red;
+  position: sticky;
+  top: 40px;
+}
+
+@media (max-width: 768px) {
+  body main {
+    max-width: none;
+    flex-direction: column;
+  }
+  body main .cart {
+    position: initial;
+  }
+}/*# sourceMappingURL=main.css.map */

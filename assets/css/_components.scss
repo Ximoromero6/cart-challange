@@ -1,0 +1,152 @@
+body {
+  background-color: $Rose_100;
+
+  main {
+    display: flex;
+    max-width: 1400px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 40px;
+
+    .shop {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      flex: 2;
+
+      .shop__title {
+        font-size: 34px;
+        font-weight: 900;
+        color: $Rose_900;
+      }
+
+      .shop__products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+
+        .product {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          .image__container {
+            position: relative;
+
+            .product__image {
+              width: 100%;
+              height: auto;
+              object-fit: cover;
+              border-radius: 10px;
+              border: 2px solid transparent;
+            }
+
+            .product__button {
+              padding: 12px 25px;
+              border-radius: 30px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+              border: 1px solid $Rose_300;
+              cursor: pointer;
+              position: absolute;
+              bottom: -20px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: max-content;
+              transition: all 0.1s;
+              background-color: $Rose_50;
+
+              i {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 18px;
+                color: $Red;
+              }
+
+              label {
+                font-weight: 600;
+                font-size: 15px;
+                font-family: inherit;
+                color: $Rose_900;
+                cursor: pointer;
+              }
+
+              &:hover {
+                border-color: $Red;
+                label {
+                  color: $Red;
+                }
+              }
+
+              &:focus {
+                transition: none;
+                outline: 2px solid $Rose_400;
+                outline-offset: 1px;
+              }
+            }
+          }
+
+          .product__info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .product__category {
+              font-size: 14px;
+              color: $Rose_400;
+              font-weight: 600;
+            }
+
+            .product__title {
+              font-size: 16px;
+              color: $Rose_900;
+              font-weight: 600;
+            }
+
+            .product__price {
+              font-size: 17px;
+              color: $Red;
+              font-weight: 600;
+            }
+          }
+
+          &.selected {
+            .image__container {
+              .product__image {
+                border-color: $Red;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .cart {
+      flex: 1;
+      height: fit-content;
+      padding: 20px;
+      border: 1px solid red;
+      position: sticky;
+      top: 40px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    main {
+      max-width: none;
+      flex-direction: column;
+
+      .shop {
+      }
+
+      .cart {
+        position: initial;
+      }
+    }
+  }
+}
