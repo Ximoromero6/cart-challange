@@ -182,6 +182,148 @@ body {
         color: $Red;
         text-align: center;
       }
+
+      .cart__list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        li {
+          border-bottom: 1px solid $Rose_100;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          padding: 20px 0;
+
+          h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: $Rose_900;
+          }
+
+          .cart__item-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .cart__item-info {
+              display: flex;
+              gap: 10px;
+              .item__quantity {
+                color: $Red;
+                font-size: 15px;
+                font-weight: 600;
+              }
+
+              .item__price {
+                color: $Rose_500;
+                font-size: 15px;
+                font-weight: normal;
+              }
+
+              .item__quantity__total {
+                color: $Rose_500;
+                font-size: 15px;
+                font-weight: 900;
+              }
+            }
+
+            .cart__button--delete {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: none;
+              background-color: transparent;
+
+              i {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: $Rose_300;
+                cursor: pointer;
+                font-size: 22px;
+              }
+
+              &:hover {
+                i {
+                  color: $Rose_500;
+                }
+              }
+            }
+          }
+        }
+        .cart__empty {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+      }
+
+      .cart__total {
+        flex-direction: column;
+        gap: 20px;
+
+        .total--info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .order--message {
+            font-size: 15px;
+            font-weight: normal;
+            color: $Rose_900;
+          }
+
+          .cart__total-price {
+            font-size: 22px;
+            font-weight: 900;
+            color: $Rose_900;
+          }
+        }
+
+        .carbon--message {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 15px;
+          border-radius: 6px;
+          background-color: $Rose_100;
+          gap: 10px;
+
+          img {
+            margin: 0;
+          }
+
+          .cart__note {
+            font-weight: normal;
+            color: $Rose_900;
+            font-size: 15px;
+
+            strong {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      .cart__confirm {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 14px 20px;
+        border-radius: 30px;
+        border: none;
+        font-family: inherit;
+        font-size: 17px;
+        font-weight: 600;
+        color: $Rose_50;
+        cursor: pointer;
+        background-color: $Red;
+        transition: background 0.1s;
+
+        &:hover {
+          background-color: darken($Red, 10);
+        }
+      }
     }
   }
 }

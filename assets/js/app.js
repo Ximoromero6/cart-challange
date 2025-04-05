@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <div class="cart__item-container">
                     <div class="cart__item-info">
                       <span class="item__quantity">${item.quantity}x</span>
-                      <span class="item__price">${parseFloat(
+                      <span class="item__price">@ ${parseFloat(
                         item.price
                       ).toFixed(2)}€</span>
                       <span class="item__quantity__total">${(
@@ -118,13 +118,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       cartTotal.innerHTML = `
-        <p><strong>Order Total</strong></p>
-        <p class="cart__total-price">€${total.toFixed(2)}</p>
-        <p class="cart__note">This is a <strong>carbon-neutral</strong> delivery</p>
+        <div class="total--info">
+          <p class="order--message">Order Total</p>
+          <p class="cart__total-price">${total.toFixed(2)}€</p>
+        </div>
+        <div class="carbon--message">
+          <img src="./assets/images/icon-carbon-neutral.svg">
+          <p class="cart__note">This is a <strong>carbon-neutral</strong> delivery</p>
+        </div>
       `;
 
-      cartTotal.style.display = "block";
-      confirmBtn.style.display = "block";
+      cartTotal.style.display = "flex";
+      confirmBtn.style.display = "flex";
     }
 
     updateCartCount();
@@ -217,6 +222,8 @@ document.addEventListener("DOMContentLoaded", function () {
     cart = [];
     renderCart();
   }
+
+  //document.getElementById("clearCartBtn").addEventListener("click", clearCart);
 
   productsContainer.addEventListener("click", handleProductActions);
   cartList.addEventListener("click", handleCartActions);
