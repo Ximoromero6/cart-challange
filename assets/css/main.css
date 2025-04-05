@@ -153,7 +153,7 @@ body main .shop .shop__products .product .image__container .product__image {
   border-radius: 10px;
   border: 2px solid transparent;
 }
-body main .shop .shop__products .product .image__container .product__button {
+body main .shop .shop__products .product .image__container .product__button-container .product__button {
   padding: 12px 25px;
   border-radius: 30px;
   display: flex;
@@ -171,30 +171,52 @@ body main .shop .shop__products .product .image__container .product__button {
   transition: all 0.1s;
   background-color: hsl(20, 50%, 98%);
 }
-body main .shop .shop__products .product .image__container .product__button i {
+body main .shop .shop__products .product .image__container .product__button-container .product__button i {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 18px;
   color: hsl(14, 86%, 42%);
 }
-body main .shop .shop__products .product .image__container .product__button label {
+body main .shop .shop__products .product .image__container .product__button-container .product__button label {
   font-weight: 600;
   font-size: 15px;
   font-family: inherit;
   color: hsl(14, 65%, 9%);
   cursor: pointer;
 }
-body main .shop .shop__products .product .image__container .product__button:hover {
+body main .shop .shop__products .product .image__container .product__button-container .product__button:hover {
   border-color: hsl(14, 86%, 42%);
 }
-body main .shop .shop__products .product .image__container .product__button:hover label {
+body main .shop .shop__products .product .image__container .product__button-container .product__button:hover label {
   color: hsl(14, 86%, 42%);
 }
-body main .shop .shop__products .product .image__container .product__button:focus {
+body main .shop .shop__products .product .image__container .product__button-container .product__button:focus {
   transition: none;
   outline: 2px solid hsl(7, 20%, 60%);
   outline-offset: 1px;
+}
+body main .shop .shop__products .product .image__container .product__button-container .product__button.action {
+  background-color: hsl(14, 86%, 42%);
+  border-color: transparent;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: inherit;
+  color: hsl(20, 50%, 98%);
+  gap: 20px;
+  cursor: default;
+}
+body main .shop .shop__products .product .image__container .product__button-container .product__button.action button {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+body main .shop .shop__products .product .image__container .product__button-container .product__button.action button i {
+  color: hsl(20, 50%, 98%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
 }
 body main .shop .shop__products .product .product__info {
   display: flex;
@@ -223,10 +245,32 @@ body main .cart {
   flex: 1;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 20px;
-  border: 1px solid red;
+  padding: 30px;
   position: sticky;
   top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  background-color: hsl(20, 50%, 98%);
+}
+body main .cart .cart__title {
+  font-size: 22px;
+  font-weight: 900;
+  color: hsl(14, 86%, 42%);
+}
+body main .cart img {
+  max-width: 160px;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0 auto;
+}
+body main .cart p {
+  font-size: 16px;
+  font-weight: 600;
+  color: hsl(14, 86%, 42%);
+  text-align: center;
 }
 
 @media (max-width: 768px) {

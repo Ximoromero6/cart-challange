@@ -1,9 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const productsContainer = document.querySelector(".shop__products");
   const cartList = document.querySelector(".cart__list");
-  const cartTotal = document.querySelector(".cart__total span");
   const cartCount = document.querySelector(".cart__count");
+  const cartTotal = document.createElement("div");
 
-  const productButtons = document.querySelectorAll(".product__button");
+  cartTotal.classList.add("cart__total");
+  cartList.after(cartTotal);
+
+  const confirmBtn = document.createElement("button");
+  confirmBtn.classList.add("cart__confirm");
+  confirmBtn.textContent = "Confirm Order";
+  cartTotal.after(confirmBtn);
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -17,9 +24,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  async function renderProducts() {
-    const productsContainer = document.querySelector(".shop__products");
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
+  function updateCartCount() {
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+    cartCount.textContent = totalItems;
+  }
+
+  async function renderProducts() {
     if (!productsContainer) {
       console.error("Products container not found");
       return;
@@ -36,11 +50,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       productElement.innerHTML = `
         <div class="image__container">
-            <img class="product__image" src="${product.image.desktop}" alt="${product.name}" />
-            <button class="product__button">
+            <img class="product__image" src="${product.image.desktop}" alt="${
+        product.name
+      }" />
+          <div class="product__button-container">
+            <button class="product__button" data-id="${index}">
                 <i class="fi fi-rr-shopping-cart-add"></i>
                 <label>Add To Cart</label>
             </button>
+          </div>
         </div>    
         <div class="product__info">
             <p class="product__category">${product.category}</p>
@@ -50,70 +68,148 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
       productsContainer.appendChild(productElement);
+
+      // If the product is already on the cart, restore controls
+      const existing = cart.find((item) => item.id === index.toString());
+      if (existing) {
+        updateProductControls(index, existing.quantity);
+      }
     });
   }
-
-  // Products load
-  renderProducts();
 
   // Cart render
   function renderCart() {
     cartList.innerHTML = "";
     let total = 0;
 
-    cart.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.classList.add("cart__item");
-      li.innerHTML = `
-                ${item.name} - €${item.price} 
-                <span class="cart__quantity">x${item.quantity}</span>
-                <div class="cart__controls">
-                    <button class="cart__button cart__button--increase" data-index="${index}">+</button>
-                    <button class="cart__button cart__button--decrease" data-index="${index}">-</button>
-                </div>
-            `;
-      cartList.appendChild(li);
-      total += parseFloat(item.price) * item.quantity;
-    });
+    if (cart.length === 0) {
+      cartList.innerHTML = `
+        <div class="cart__empty">
+          <img src="./assets/images/illustration-empty-cart.svg" alt="Empty cart" class="cart__empty-image"/>
+          <p>Your added items will appear here</p>
+        </div>
+      `;
 
-    cartTotal.textContent = total.toFixed(2);
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-    localStorage.setItem("cart", JSON.stringify(cart));
+      cartTotal.style.display = "none";
+      confirmBtn.style.display = "none";
+    } else {
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.classList.add("cart__item");
+        li.innerHTML = `
+                  <h4>${item.name}</h4>
+                  <div class="cart__item-container">
+                    <div class="cart__item-info">
+                      <span class="item__quantity">${item.quantity}x</span>
+                      <span class="item__price">${parseFloat(
+                        item.price
+                      ).toFixed(2)}€</span>
+                      <span class="item__quantity__total">${(
+                        item.quantity * item.price
+                      ).toFixed(2)}€</span>
+                    </div>
+                    <button class="cart__button--delete" data-id="${item.id}">
+                      <i class="fi fi-rr-cross-circle"></i>
+                    </button>
+                  </div>
+              `;
+        cartList.appendChild(li);
+        total += item.quantity * item.price;
+      });
+
+      cartTotal.innerHTML = `
+        <p><strong>Order Total</strong></p>
+        <p class="cart__total-price">€${total.toFixed(2)}</p>
+        <p class="cart__note">This is a <strong>carbon-neutral</strong> delivery</p>
+      `;
+
+      cartTotal.style.display = "block";
+      confirmBtn.style.display = "block";
+    }
+
+    updateCartCount();
+    saveCart();
+  }
+
+  function updateProductControls(id, quantity) {
+    const product = document.querySelector(`.product[data-id="${id}"]`);
+    if (!product) return;
+
+    const container = product.querySelector(".product__button-container");
+
+    if (quantity > 0) {
+      container.innerHTML = `
+      <div class="product__button action">
+        <button class="product__button--decrease" data-id="${id}">
+          <i class="fi fi-rr-minus-circle"></i>
+        </button>
+        <span class="product__quantity">${quantity}</span>
+        <button class="product__button--increase" data-id="${id}">
+           <i class="fi fi-rr-add"></i>
+        </button>
+      </div>
+        `;
+    } else {
+      container.innerHTML = `
+        <button class="product__button" data-id="${id}">
+          <i class="fi fi-rr-shopping-cart-add"></i>
+          <label>Add To Cart</label>
+        </button>
+      `;
+    }
   }
 
   // Función para agregar producto al carrito (sin duplicar)
-  function addToCart(event) {
-    const product = event.target.closest(".product");
-    const productId = product.getAttribute("data-id");
-    const productName = product.getAttribute("data-name");
-    const productPrice = product.getAttribute("data-price");
-
-    let existingItem = cart.find((item) => item.id === productId);
-
-    if (existingItem) {
-      existingItem.quantity += 1;
+  function addToCart(productData) {
+    const existing = cart.find((item) => item.id === productData.id);
+    if (existing) {
+      existing.quantity += 1;
     } else {
-      cart.push({
-        id: productId,
-        name: productName,
-        price: productPrice,
-        quantity: 1,
-      });
+      cart.push({ ...productData, quantity: 1 });
     }
-
+    updateProductControls(productData.id, existing ? existing.quantity : 1);
     renderCart();
   }
 
-  // Función para modificar cantidad
-  function updateQuantity(event) {
-    const index = event.target.getAttribute("data-index");
-    if (event.target.classList.contains("cart__button--increase")) {
-      cart[index].quantity++;
-    } else if (event.target.classList.contains("cart__button--decrease")) {
-      cart[index].quantity--;
-      if (cart[index].quantity === 0) cart.splice(index, 1);
+  function changeQuantity(id, delta) {
+    const item = cart.find((i) => i.id === id);
+    if (!item) return;
+
+    item.quantity += delta;
+    if (item.quantity <= 0) {
+      cart = cart.filter((i) => i.id !== id);
     }
+    updateProductControls(id, item.quantity || 0);
     renderCart();
+  }
+
+  function handleCartActions(e) {
+    if (e.target.closest(".cart__button--delete")) {
+      const id = e.target.closest("button").dataset.id;
+      cart = cart.filter((item) => item.id !== id);
+      updateProductControls(id, 0);
+      renderCart();
+    }
+  }
+
+  function handleProductActions(e) {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+
+    const id = btn.dataset.id;
+
+    if (btn.classList.contains("product__button")) {
+      const productEl = btn.closest(".product");
+      addToCart({
+        id,
+        name: productEl.dataset.name,
+        price: parseFloat(productEl.dataset.price),
+      });
+    } else if (btn.classList.contains("product__button--increase")) {
+      changeQuantity(id, 1);
+    } else if (btn.classList.contains("product__button--decrease")) {
+      changeQuantity(id, -1);
+    }
   }
 
   // Función para vaciar el carrito
@@ -122,11 +218,9 @@ document.addEventListener("DOMContentLoaded", function () {
     renderCart();
   }
 
-  productButtons.forEach((button) =>
-    button.addEventListener("click", addToCart)
-  );
-  cartList.addEventListener("click", updateQuantity);
-  /*   clearCartBtn.addEventListener("click", clearCart);
-   */
+  productsContainer.addEventListener("click", handleProductActions);
+  cartList.addEventListener("click", handleCartActions);
+
+  renderProducts();
   renderCart();
 });

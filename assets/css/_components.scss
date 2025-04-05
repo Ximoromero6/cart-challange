@@ -41,50 +41,77 @@ body {
               border: 2px solid transparent;
             }
 
-            .product__button {
-              padding: 12px 25px;
-              border-radius: 30px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              gap: 10px;
-              border: 1px solid $Rose_300;
-              cursor: pointer;
-              position: absolute;
-              bottom: -20px;
-              left: 50%;
-              transform: translateX(-50%);
-              width: max-content;
-              transition: all 0.1s;
-              background-color: $Rose_50;
-
-              i {
+            .product__button-container {
+              .product__button {
+                padding: 12px 25px;
+                border-radius: 30px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 18px;
-                color: $Red;
-              }
-
-              label {
-                font-weight: 600;
-                font-size: 15px;
-                font-family: inherit;
-                color: $Rose_900;
+                gap: 10px;
+                border: 1px solid $Rose_300;
                 cursor: pointer;
-              }
+                position: absolute;
+                bottom: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: max-content;
+                transition: all 0.1s;
+                background-color: $Rose_50;
 
-              &:hover {
-                border-color: $Red;
-                label {
+                i {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 18px;
                   color: $Red;
                 }
-              }
 
-              &:focus {
-                transition: none;
-                outline: 2px solid $Rose_400;
-                outline-offset: 1px;
+                label {
+                  font-weight: 600;
+                  font-size: 15px;
+                  font-family: inherit;
+                  color: $Rose_900;
+                  cursor: pointer;
+                }
+
+                &:hover {
+                  border-color: $Red;
+                  label {
+                    color: $Red;
+                  }
+                }
+
+                &:focus {
+                  transition: none;
+                  outline: 2px solid $Rose_400;
+                  outline-offset: 1px;
+                }
+
+                &.action {
+                  background-color: $Red;
+                  border-color: transparent;
+                  font-weight: 600;
+                  font-size: 15px;
+                  font-family: inherit;
+                  color: $Rose_50;
+                  gap: 20px;
+                  cursor: default;
+
+                  button {
+                    background-color: transparent;
+                    cursor: pointer;
+                    border: none;
+
+                    i {
+                      color: $Rose_50;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      font-size: 18px;
+                    }
+                  }
+                }
               }
             }
           }
@@ -127,10 +154,34 @@ body {
     .cart {
       flex: 1;
       height: fit-content;
-      padding: 20px;
-      border: 1px solid red;
+      padding: 30px;
       position: sticky;
       top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-radius: 10px;
+      background-color: $Rose_50;
+
+      .cart__title {
+        font-size: 22px;
+        font-weight: 900;
+        color: $Red;
+      }
+
+      img {
+        max-width: 160px;
+        height: auto;
+        object-fit: cover;
+        margin: 0 auto;
+      }
+
+      p {
+        font-size: 16px;
+        font-weight: 600;
+        color: $Red;
+        text-align: center;
+      }
     }
   }
 }
