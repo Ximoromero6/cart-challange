@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
       productElement.setAttribute("data-id", index);
       productElement.setAttribute("data-name", product.name);
       productElement.setAttribute("data-price", product.price);
+      productElement.setAttribute("data-image", product.image.thumbnail);
 
       productElement.innerHTML = `
         <div class="image__container">
@@ -143,6 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = product.querySelector(".product__button-container");
 
     if (quantity > 0) {
+      product.classList.add("selected");
+
       container.innerHTML = `
       <div class="product__button action">
         <button class="product__button--decrease" data-id="${id}">
@@ -155,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
         `;
     } else {
+      product.classList.remove("selected");
+
       container.innerHTML = `
         <button class="product__button" data-id="${id}">
           <i class="fi fi-rr-shopping-cart-add"></i>
@@ -209,6 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
         id,
         name: productEl.dataset.name,
         price: parseFloat(productEl.dataset.price),
+        image: productEl.dataset.image,
       });
     } else if (btn.classList.contains("product__button--increase")) {
       changeQuantity(id, 1);
@@ -220,10 +226,81 @@ document.addEventListener("DOMContentLoaded", function () {
   // Función para vaciar el carrito
   function clearCart() {
     cart = [];
+    localStorage.removeItem("cart");
+    resetProductStates();
     renderCart();
   }
 
-  //document.getElementById("clearCartBtn").addEventListener("click", clearCart);
+  function showOrderSummary() {
+    let total = 0;
+    const productHTML = cart
+      .map(({ name, quantity, price, image }) => {
+        const subtotal = quantity * price;
+        total += subtotal;
+        return `
+        <div class="order-item-row">
+          <div class="order-item-row-name">
+            <img src="${image}">
+            <div class="order-item-text">
+              <span class="name">${name}</span>
+              <div>
+                <span>${quantity}x</span>
+                <span>@${price.toFixed(2)}€</span>
+               </div>
+            </div>
+          </div>
+          <span class="subtotal">${subtotal.toFixed(2)}€</span>
+        </div>
+      `;
+      })
+      .join("");
+
+    // Crear overlay
+    const overlay = document.createElement("div");
+    overlay.className = "order-overlay";
+
+    // Contenido del popup
+    overlay.innerHTML = `
+      <div class="order-popup">
+        <i class="fi fi-rs-check-circle"></i>
+
+        <div class="info-resume">
+          <h2 class="order-title">Order Confirmed</h2>
+          <p class="order-subtitle">We hope you enjoy your food!</p>
+        </div>
+
+        <div class="order-list">
+          ${productHTML}
+
+          <div class="order-total-row">
+            <span>Order Total</span>
+            <span>${total.toFixed(2)}€</span>
+          </div>
+        </div>
+  
+        <button class="order-reset-btn">Start New Order</button>
+      </div>
+    `;
+
+    // Evento del botón
+    overlay.querySelector(".order-reset-btn").addEventListener("click", () => {
+      clearCart();
+      overlay.remove();
+    });
+
+    // Agregar al DOM
+    document.body.appendChild(overlay);
+  }
+
+  function resetProductStates() {
+    const allProducts = document.querySelectorAll(".product");
+    allProducts.forEach((product) => {
+      const id = product.getAttribute("data-id");
+      updateProductControls(id, 0);
+    });
+  }
+
+  confirmBtn.addEventListener("click", showOrderSummary);
 
   productsContainer.addEventListener("click", handleProductActions);
   cartList.addEventListener("click", handleCartActions);

@@ -95,7 +95,8 @@ body {
                   font-size: 15px;
                   font-family: inherit;
                   color: $Rose_50;
-                  gap: 20px;
+                  gap: 30px;
+                  padding: 12px 15px;
                   cursor: default;
 
                   button {
@@ -323,6 +324,149 @@ body {
         &:hover {
           background-color: darken($Red, 10);
         }
+      }
+    }
+  }
+}
+
+.order-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .order-popup {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 500px;
+
+    i {
+      font-size: 34px;
+      color: $Green;
+    }
+
+    .info-resume {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .order-title {
+        font-size: 32px;
+        font-weight: 900;
+        color: $Rose_900;
+      }
+
+      .order-subtitle {
+        color: $Rose_500;
+      }
+    }
+
+    .order-list {
+      background-color: $Rose_50;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 5px;
+
+      .order-total-row,
+      .order-item-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .order-item-row {
+        border-bottom: 1px solid $Rose_100;
+        padding: 20px 0;
+
+        .order-item-row-name {
+          display: flex;
+          gap: 15px;
+
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+          }
+
+          .order-item-text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .name {
+              color: $Rose_900;
+              font-size: 15px;
+              font-weight: 600;
+            }
+
+            div {
+              display: flex;
+              gap: 10px;
+
+              span {
+                &:first-child {
+                  color: $Red;
+                  font-size: 15px;
+                  font-weight: 600;
+                }
+                &:last-child {
+                  color: $Rose_500;
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+
+        .subtotal {
+          color: $Rose_900;
+          font-size: 15px;
+          font-weight: 600;
+        }
+      }
+
+      .order-total-row {
+        padding: 20px 0;
+        span {
+          font-size: 14px;
+          color: $Rose_900;
+          &:last-child {
+            font-size: 24px;
+            font-weight: 900;
+          }
+        }
+      }
+    }
+
+    .order-reset-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 20px;
+      border-radius: 30px;
+      border: none;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 600;
+      color: $Rose_50;
+      cursor: pointer;
+      background-color: $Red;
+      transition: background 0.1s;
+
+      &:hover {
+        background-color: darken($Red, 10);
       }
     }
   }

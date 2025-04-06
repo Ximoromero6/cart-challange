@@ -203,7 +203,8 @@ body main .shop .shop__products .product .image__container .product__button-cont
   font-size: 15px;
   font-family: inherit;
   color: hsl(20, 50%, 98%);
-  gap: 20px;
+  gap: 30px;
+  padding: 12px 15px;
   cursor: default;
 }
 body main .shop .shop__products .product .image__container .product__button-container .product__button.action button {
@@ -392,6 +393,130 @@ body main .cart .cart__confirm {
   transition: background 0.1s;
 }
 body main .cart .cart__confirm:hover {
+  background-color: #982c0b;
+}
+
+.order-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.order-overlay .order-popup {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 500px;
+}
+.order-overlay .order-popup i {
+  font-size: 34px;
+  color: hsl(159, 69%, 38%);
+}
+.order-overlay .order-popup .info-resume {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.order-overlay .order-popup .info-resume .order-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: hsl(14, 65%, 9%);
+}
+.order-overlay .order-popup .info-resume .order-subtitle {
+  color: hsl(12, 20%, 44%);
+}
+.order-overlay .order-popup .order-list {
+  background-color: hsl(20, 50%, 98%);
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+.order-overlay .order-popup .order-list .order-total-row,
+.order-overlay .order-popup .order-list .order-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-overlay .order-popup .order-list .order-item-row {
+  border-bottom: 1px solid hsl(13, 31%, 94%);
+  padding: 20px 0;
+}
+.order-overlay .order-popup .order-list .order-item-row .order-item-row-name {
+  display: flex;
+  gap: 15px;
+}
+.order-overlay .order-popup .order-list .order-item-row .order-item-row-name img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.order-overlay .order-popup .order-list .order-item-row .order-item-row-name .order-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.order-overlay .order-popup .order-list .order-item-row .order-item-row-name .order-item-text .name {
+  color: hsl(14, 65%, 9%);
+  font-size: 15px;
+  font-weight: 600;
+}
+.order-overlay .order-popup .order-list .order-item-row .order-item-row-name .order-item-text div {
+  display: flex;
+  gap: 10px;
+}
+.order-overlay .order-popup .order-list .order-item-row .order-item-row-name .order-item-text div span:first-child {
+  color: hsl(14, 86%, 42%);
+  font-size: 15px;
+  font-weight: 600;
+}
+.order-overlay .order-popup .order-list .order-item-row .order-item-row-name .order-item-text div span:last-child {
+  color: hsl(12, 20%, 44%);
+  font-size: 15px;
+}
+.order-overlay .order-popup .order-list .order-item-row .subtotal {
+  color: hsl(14, 65%, 9%);
+  font-size: 15px;
+  font-weight: 600;
+}
+.order-overlay .order-popup .order-list .order-total-row {
+  padding: 20px 0;
+}
+.order-overlay .order-popup .order-list .order-total-row span {
+  font-size: 14px;
+  color: hsl(14, 65%, 9%);
+}
+.order-overlay .order-popup .order-list .order-total-row span:last-child {
+  font-size: 24px;
+  font-weight: 900;
+}
+.order-overlay .order-popup .order-reset-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 20px;
+  border-radius: 30px;
+  border: none;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  color: hsl(20, 50%, 98%);
+  cursor: pointer;
+  background-color: hsl(14, 86%, 42%);
+  transition: background 0.1s;
+}
+.order-overlay .order-popup .order-reset-btn:hover {
   background-color: #982c0b;
 }
 
