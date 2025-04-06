@@ -57,14 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="product__button-container">
             <button class="product__button" data-id="${index}">
                 <i class="fi fi-rr-shopping-cart-add"></i>
-                <label>Add To Cart</label>
+                <span>Add To Cart</span>
             </button>
           </div>
         </div>    
         <div class="product__info">
             <p class="product__category">${product.category}</p>
             <h2 class="product__title">${product.name}</h2>
-            <p class="product__price">€${product.price.toFixed(2)}</p>
+            <p class="product__price">${product.price.toFixed(2)}€</p>
         </div>
         `;
 
@@ -85,10 +85,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (cart.length === 0) {
       cartList.innerHTML = `
-        <div class="cart__empty">
+        <li class="cart__empty">
           <img src="./assets/images/illustration-empty-cart.svg" alt="Empty cart" class="cart__empty-image"/>
           <p>Your added items will appear here</p>
-        </div>
+        </li>
       `;
 
       cartTotal.style.display = "none";
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
       container.innerHTML = `
         <button class="product__button" data-id="${id}">
           <i class="fi fi-rr-shopping-cart-add"></i>
-          <label>Add To Cart</label>
+          <span>Add To Cart</span>
         </button>
       `;
     }

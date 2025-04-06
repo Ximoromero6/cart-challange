@@ -111,11 +111,11 @@ input {
 }
 
 body {
-  background-color: hsl(13, 31%, 94%);
+  background-color: hsl(20, 50%, 98%);
 }
 body main {
   display: flex;
-  max-width: 1400px;
+  max-width: 1300px;
   width: 100%;
   margin: 40px auto;
   padding: 0 20px;
@@ -134,7 +134,7 @@ body main .shop .shop__title {
 }
 body main .shop .shop__products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 25px;
 }
 body main .shop .shop__products .product {
@@ -169,7 +169,7 @@ body main .shop .shop__products .product .image__container .product__button-cont
   width: -moz-max-content;
   width: max-content;
   transition: all 0.1s;
-  background-color: hsl(20, 50%, 98%);
+  background-color: white;
 }
 body main .shop .shop__products .product .image__container .product__button-container .product__button i {
   display: flex;
@@ -178,7 +178,7 @@ body main .shop .shop__products .product .image__container .product__button-cont
   font-size: 18px;
   color: hsl(14, 86%, 42%);
 }
-body main .shop .shop__products .product .image__container .product__button-container .product__button label {
+body main .shop .shop__products .product .image__container .product__button-container .product__button span {
   font-weight: 600;
   font-size: 15px;
   font-family: inherit;
@@ -188,7 +188,7 @@ body main .shop .shop__products .product .image__container .product__button-cont
 body main .shop .shop__products .product .image__container .product__button-container .product__button:hover {
   border-color: hsl(14, 86%, 42%);
 }
-body main .shop .shop__products .product .image__container .product__button-container .product__button:hover label {
+body main .shop .shop__products .product .image__container .product__button-container .product__button:hover span {
   color: hsl(14, 86%, 42%);
 }
 body main .shop .shop__products .product .image__container .product__button-container .product__button:focus {
@@ -205,6 +205,10 @@ body main .shop .shop__products .product .image__container .product__button-cont
   color: hsl(20, 50%, 98%);
   gap: 30px;
   padding: 12px 15px;
+  cursor: default;
+}
+body main .shop .shop__products .product .image__container .product__button-container .product__button.action span {
+  color: hsl(20, 50%, 98%);
   cursor: default;
 }
 body main .shop .shop__products .product .image__container .product__button-container .product__button.action button {
@@ -253,7 +257,8 @@ body main .cart {
   flex-direction: column;
   gap: 20px;
   border-radius: 10px;
-  background-color: hsl(20, 50%, 98%);
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 body main .cart .cart__title {
   font-size: 22px;
@@ -284,6 +289,10 @@ body main .cart .cart__list li {
   flex-direction: column;
   gap: 10px;
   padding: 20px 0;
+}
+body main .cart .cart__list li.cart__empty {
+  border: none;
+  padding-bottom: 20px;
 }
 body main .cart .cart__list li h4 {
   font-size: 14px;
@@ -416,6 +425,7 @@ body main .cart .cart__confirm:hover {
   flex-direction: column;
   gap: 20px;
   min-width: 500px;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .order-overlay .order-popup i {
   font-size: 34px;
@@ -525,7 +535,22 @@ body main .cart .cart__confirm:hover {
     max-width: none;
     flex-direction: column;
   }
+  body main .shop .shop__products .product .image__container .product__image {
+    max-height: 250px;
+  }
   body main .cart {
     position: initial;
+  }
+  .order-overlay .order-popup {
+    min-width: initial;
+    width: 100%;
+  }
+}
+@keyframes slide-top {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100px);
   }
 }/*# sourceMappingURL=main.css.map */

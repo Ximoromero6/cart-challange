@@ -1,9 +1,9 @@
 body {
-  background-color: $Rose_100;
+  background-color: $Rose_50;
 
   main {
     display: flex;
-    max-width: 1400px;
+    max-width: 1300px;
     width: 100%;
     margin: 40px auto;
     padding: 0 20px;
@@ -23,7 +23,7 @@ body {
 
       .shop__products {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
         gap: 25px;
 
         .product {
@@ -57,7 +57,7 @@ body {
                 transform: translateX(-50%);
                 width: max-content;
                 transition: all 0.1s;
-                background-color: $Rose_50;
+                background-color: white;
 
                 i {
                   display: flex;
@@ -67,7 +67,7 @@ body {
                   color: $Red;
                 }
 
-                label {
+                span {
                   font-weight: 600;
                   font-size: 15px;
                   font-family: inherit;
@@ -77,7 +77,7 @@ body {
 
                 &:hover {
                   border-color: $Red;
-                  label {
+                  span {
                     color: $Red;
                   }
                 }
@@ -98,6 +98,11 @@ body {
                   gap: 30px;
                   padding: 12px 15px;
                   cursor: default;
+
+                  span {
+                    color: $Rose_50;
+                    cursor: default;
+                  }
 
                   button {
                     background-color: transparent;
@@ -162,7 +167,9 @@ body {
       flex-direction: column;
       gap: 20px;
       border-radius: 10px;
-      background-color: $Rose_50;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
       .cart__title {
         font-size: 22px;
@@ -194,6 +201,11 @@ body {
           flex-direction: column;
           gap: 10px;
           padding: 20px 0;
+
+          &.cart__empty {
+            border: none;
+            padding-bottom: 20px;
+          }
 
           h4 {
             font-size: 14px;
@@ -349,6 +361,8 @@ body {
     flex-direction: column;
     gap: 20px;
     min-width: 500px;
+    -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
     i {
       font-size: 34px;
@@ -479,11 +493,48 @@ body {
       flex-direction: column;
 
       .shop {
+        .shop__products {
+          .product {
+            .image__container {
+              .product__image {
+                max-height: 250px;
+              }
+            }
+          }
+        }
       }
 
       .cart {
         position: initial;
       }
     }
+  }
+
+  .order-overlay {
+    .order-popup {
+      min-width: initial;
+      width: 100%;
+    }
+  }
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
   }
 }
